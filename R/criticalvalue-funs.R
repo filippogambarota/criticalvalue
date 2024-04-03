@@ -159,7 +159,7 @@ crit_from_data_t2sp <- function(m1, m2 = NULL,
 
 critical_t1s <- function(m = NULL, s = NULL, t = NULL,
                          n, se = NULL,
-                         hypothesis = c("2t", "1t"),
+                         hypothesis = c("two.sided", "greater", "less"),
                          conf.level = 0.95){
   hypothesis <- match.arg(hypothesis)
   if(!is.null(m)){
@@ -185,7 +185,7 @@ critical_t2s <- function(m1 = NULL, m2 = NULL, t = NULL,
                          sd1 = NULL, sd2 = NULL,
                          n1, n2, se = NULL,
                          var.equal = FALSE,
-                         hypothesis = c("2t", "1t"),
+                         hypothesis = c("two.sided", "greater", "less"),
                          conf.level = 0.95){
   hypothesis <- match.arg(hypothesis)
   if(!is.null(m1) | !is.null(m2)){
@@ -219,7 +219,7 @@ critical_t2s <- function(m1 = NULL, m2 = NULL, t = NULL,
 critical_t2sp <- function(m1 = NULL, m2 = NULL, t = NULL,
                           sd1 = NULL, sd2 = NULL, r12 = NULL,
                           n, se = NULL,
-                          hypothesis = c("2t", "1t"),
+                          hypothesis = c("two.sided", "greater", "less"),
                           conf.level = 0.95){
   hypothesis <- match.arg(hypothesis)
   if(!is.null(m1)){
@@ -247,7 +247,7 @@ critical_t2sp <- function(m1 = NULL, m2 = NULL, t = NULL,
 
 critical_cor <- function(r = NULL, n, 
                          conf.level = 0.95, 
-                         hypothesis = c("2t", "1t"), 
+                         hypothesis = c("two.sided", "greater", "less"), 
                          test = c("t", "z")){
   df <- n - 2
   test <- match.arg(test, test)
@@ -280,7 +280,7 @@ critical_cor <- function(r = NULL, n,
 
 critical_coef_lm <- function(seb, n = NULL, p = NULL,df = NULL,
                              conf.level = 0.95,
-                             hypothesis = c("2t", "1t"),
+                             hypothesis = c("two.sided", "greater", "less"),
                              test = c("t", "z")){
   if(is.null(df) & (is.null(p) & is.null(n))){
     stop("df or p and n need cannot be NULL")

@@ -16,7 +16,8 @@ critical.htest <- function(x){
     D <- insight::get_data(x)
     conf.level <- attributes(x$conf.int)$conf.level
     
-    hypothesis <- ifelse(x$alternative == "two.sided", "2t", "1t")
+    # hypothesis <- ifelse(x$alternative == "two.sided", "2t", "1t")
+    hypothesis <- x$alternative
     
     alpha <- .get_alpha(conf.level, hypothesis)
     df <- x$parameter
@@ -29,7 +30,7 @@ critical.htest <- function(x){
   
   if(grepl("correlation", method)){
     n <- df + 2
-    cc <- critical_cor(n = n)
+    cc <- critical_cor(n = n, conf.level = conf.level, hypothesis = hypothesis)
     dc <- bc <- cc$rc
     d <- b
     class(x) <- c("critvalue", "ctest", "htest")
@@ -83,12 +84,12 @@ critical.htest <- function(x){
   return(x)
 }
 #' @export
-critical.lm <- function(x, conf.level = 0.95, 
-                        hypothesis = c("2t", "1t"),
+critical.lm <- function(x, conf.level = 0.95,
                         standardize = FALSE,
                         ...){
   
-  hypothesis <- match.arg(hypothesis)
+  # always two.sided
+  hypothesis <- "two.sided"
   alpha <- .get_alpha(conf.level, hypothesis)
   df <- x$df.residual
   
@@ -115,18 +116,40 @@ print.critvalue <- function(x, digits = getOption("digits"), ...){
   x <- .round_list(x, digits)
   if(inherits(x, "ttest")){
     cat("|== Effect Size and Critical Value ==|", "\n")
-    if(grepl("Paired", x$method)){
+    if(x$alternative == "two.sided"){
       cat("d =", x$d, "|dc| =", abs(x$dc), "|bc| =", abs(x$bc),"\n")
-      cat("dz =", x$dz, "|dzc| =", abs(x$dzc), "\n")
-      cat("gz =", x$gz, "|gzc| =", abs(x$gzc), "\n\n")
+      cat("g =", x$g, "|gc| =", abs(x$gc), "\n")
+    } else if(x$alternative == "greater"){
+      cat("d =", x$d, "dc =", abs(x$dc), "bc =", abs(x$bc),"\n")
+      cat("g =", x$g, "gc =", abs(x$gc), "\n\n")
     }else{
-      cat("d =", x$d, "|dc| =", abs(x$dc), "|bc| =", abs(x$bc),"\n")
-      cat("g =", x$g, "|gc| =", abs(x$gc), "\n\n")
+      cat("d =", x$d, "dc =", -abs(x$dc), "bc =", -abs(x$bc),"\n")
+      cat("g =", x$g, "gc =", -abs(x$gc), "\n\n")
+    }
+    
+    if(grepl("Paired", x$method)){
+      if(x$alternative == "two.sided"){
+        cat("dz =", x$dz, "|dzc| =", abs(x$dzc), "\n")
+        cat("gz =", x$gz, "|gzc| =", abs(x$dzc), "\n")
+      } else if(x$alternative == "greater"){
+        cat("dz =", x$dz, "dzc =", abs(x$dzc), "\n")
+        cat("gz =", x$gz, "gzc =", abs(x$dzc), "\n")
+      } else{
+        cat("dz =", x$dz, "dzc =", -abs(x$dzc), "\n")
+        cat("gz =", x$gz, "gzc =", -abs(x$dzc), "\n")
+      }
     }
     
   }else if(inherits(x, "ctest")){
     cat("|== Critical Value ==|", "\n")
-    cat("|rc| =", abs(x$dc),"\n\n")
+    if(x$alternative == "two.sided"){
+      cat("|rc| =", abs(x$dc),"\n\n")
+    } else if(x$alternative == "greater"){
+      cat("rc =", abs(x$dc),"\n\n")
+    } else{
+      cat("rc =", -abs(x$dc),"\n\n")
+    }
+    
   } else if(inherits(x, "lm")){
     cat("\nCritical |Coefficients| \n\n")
     bc <- x$bc
