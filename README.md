@@ -37,17 +37,17 @@ critical(ttest)
 #>  Welch Two Sample t-test
 #> 
 #> data:  x and y
-#> t = 1.9365, df = 57.688, p-value = 0.05771
+#> t = 0.722, df = 56.8, p-value = 0.47
 #> alternative hypothesis: true difference in means is not equal to 0
 #> 95 percent confidence interval:
-#>  -0.01941557  1.16849325
+#>  -0.31007  0.65968
 #> sample estimates:
 #> mean of x mean of y 
-#> 0.8212300 0.2466912 
+#>   0.49722   0.32242 
 #> 
 #> |== Effect Size and Critical Value ==| 
-#> d = 0.500004 |dc| = 0.1425943 |bc| = 0.4487234 
-#> g = 0.4734645 |gc| = 0.1350256
+#> d = 0.18642 |dc| = 0.14281 |bc| = 0.36673 
+#> g = 0.17636 |gc| = 0.1351
 
 # cor.test
 ctest <- cor.test(x, y)
@@ -56,16 +56,16 @@ critical(ctest)
 #>  Pearson's product-moment correlation
 #> 
 #> data:  x and y
-#> t = -0.85668, df = 28, p-value = 0.3989
+#> t = 1.09, df = 28, p-value = 0.29
 #> alternative hypothesis: true correlation is not equal to 0
 #> 95 percent confidence interval:
-#>  -0.4917713  0.2126989
+#>  -0.17095  0.52393
 #> sample estimates:
-#>        cor 
-#> -0.1598169 
+#>     cor 
+#> 0.20174 
 #> 
 #> |== Critical Value ==| 
-#> |rc| = 0.3610069
+#> |rc| = 0.36101
 
 # linear model (unstandardized)
 z <- rnorm(30)
@@ -81,57 +81,58 @@ fit
 #> 
 #> Coefficients:
 #> (Intercept)            x            q            z  
-#>     0.38673     -0.21990     -0.47079      0.08601  
+#>      0.2101       0.2346       0.0511       0.0408  
 #> 
 #> 
 #> Critical |Coefficients| 
 #> 
 #> (Intercept)           x           q           z 
-#>   0.5509830   0.4278069   0.5455706   0.6974748
+#>     0.45111     0.46959     0.44287     0.40206
 summary(fit)
 #> 
 #> Call:
 #> lm(formula = y ~ x + q + z, data = dat)
 #> 
 #> Residuals:
-#>     Min      1Q  Median      3Q     Max 
-#> -2.4922 -0.7973 -0.1638  0.6485  2.6393 
+#>    Min     1Q Median     3Q    Max 
+#> -2.126 -0.653  0.316  0.726  1.754 
 #> 
 #> Coefficients:
-#>             Estimate |Critical Estimate| Std. Error t value Pr(>|t|)  
-#> (Intercept)  0.38673             0.55098    0.26805   1.443   0.1610  
-#> x           -0.21990             0.42781    0.20812  -1.057   0.3004  
-#> q           -0.47079             0.54557    0.26542  -1.774   0.0878 .
-#> z            0.08601             0.69747    0.33932   0.253   0.8019  
-#> ---
-#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#>             Estimate |Critical Estimate| Std. Error t value Pr(>|t|)
+#> (Intercept)   0.2101              0.4511     0.2195    0.96     0.35
+#> x             0.2346              0.4696     0.2285    1.03     0.31
+#> q             0.0511              0.4429     0.2155    0.24     0.81
+#> z             0.0408              0.4021     0.1956    0.21     0.84
 #> 
-#> Residual standard error: 1.168 on 26 degrees of freedom
-#> Multiple R-squared:  0.1367, Adjusted R-squared:  0.03707 
-#> F-statistic: 1.372 on 3 and 26 DF,  p-value: 0.2733
+#> Residual standard error: 1.04 on 26 degrees of freedom
+#> Multiple R-squared:  0.0477, Adjusted R-squared:  -0.0622 
+#> F-statistic: 0.434 on 3 and 26 DF,  p-value: 0.73
 
 # linear model (standardized)
 fit <- lm(y ~ x + q + z, data = dat)
 fit <- critical(fit, standardize = TRUE)
-summary(fit)
+summary(fit, digits = 5)
 #> 
 #> Call:
 #> lm(formula = y ~ x + q + z, data = D)
 #> 
 #> Residuals:
-#>     Min      1Q  Median      3Q     Max 
-#> -2.0932 -0.6696 -0.1376  0.5447  2.2168 
+#>    Min     1Q Median     3Q    Max 
+#> -2.116 -0.650  0.314  0.722  1.746 
 #> 
 #> Coefficients:
-#>               Estimate |Critical Estimate| Std. Error t value Pr(>|t|)  
-#> (Intercept)  3.374e-17           3.683e-01  1.792e-01   0.000   1.0000  
-#> x           -2.043e-01           3.974e-01  1.933e-01  -1.057   0.3004  
-#> q           -3.544e-01           4.107e-01  1.998e-01  -1.774   0.0878 .
-#> z            5.285e-02           4.286e-01  2.085e-01   0.253   0.8019  
-#> ---
-#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#>                          Estimate   |Critical Estimate|            Std. Error
+#> (Intercept) -0.000000000000000173  0.386779862544724795  0.188165567115443216
+#> x            0.202124205896398623  0.404628061505859005  0.196848585040459267
+#> q            0.052045063843277305  0.451298916263581429  0.219553613672175685
+#> z            0.045866154056785180  0.451720605985108326  0.219758762629714000
+#>             t value Pr(>|t|)
+#> (Intercept)    0.00     1.00
+#> x              1.03     0.31
+#> q              0.24     0.81
+#> z              0.21     0.84
 #> 
-#> Residual standard error: 0.9813 on 26 degrees of freedom
-#> Multiple R-squared:  0.1367, Adjusted R-squared:  0.03707 
-#> F-statistic: 1.372 on 3 and 26 DF,  p-value: 0.2733
+#> Residual standard error: 1.03 on 26 degrees of freedom
+#> Multiple R-squared:  0.0477, Adjusted R-squared:  -0.0622 
+#> F-statistic: 0.434 on 3 and 26 DF,  p-value: 0.73
 ```
