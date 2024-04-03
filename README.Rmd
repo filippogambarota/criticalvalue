@@ -1,0 +1,65 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# criticalvalue
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of criticalvalue is to ...
+
+## Installation
+
+You can install the development version of criticalvalue like so:
+
+``` r
+# require(devtools)
+devtools::install_github("filippogambarota/criticalvalue")
+```
+
+## Example
+
+This is a basic example which shows you how to solve a common problem:
+
+```{r example}
+library(criticalvalue)
+# devtools::load_all()
+
+# t-test
+
+x <- rnorm(30, 0.5, 1)
+y <- rnorm(30, 0, 1)
+
+ttest <- t.test(x, y)
+critical(ttest)
+
+# cor.test
+ctest <- cor.test(x, y)
+critical(ctest)
+
+# linear model (unstandardized)
+z <- rnorm(30)
+q <- rnorm(30)
+
+dat <- data.frame(x, y, z, q)
+fit <- lm(y ~ x + q + z, data = dat)
+fit <- critical(fit)
+summary(fit)
+
+# linear model (standardized)
+fit <- lm(y ~ x + q + z, data = dat)
+fit <- critical(fit, standardize = TRUE)
+summary(fit)
+```
