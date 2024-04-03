@@ -34,8 +34,8 @@ devtools::install_github("filippogambarota/criticalvalue")
 This is a basic example which shows you how to solve a common problem:
 
 ```{r example}
-library(criticalvalue)
-# devtools::load_all()
+# library(criticalvalue)
+devtools::load_all()
 
 # t-test
 
@@ -56,6 +56,7 @@ q <- rnorm(30)
 dat <- data.frame(x, y, z, q)
 fit <- lm(y ~ x + q + z, data = dat)
 fit <- critical(fit)
+fit
 summary(fit)
 
 # linear model (standardized)
