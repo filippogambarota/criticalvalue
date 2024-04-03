@@ -41,7 +41,8 @@ critical.htest <- function(x){
         mm <- tapply(D$x, D$y, mean)
         tt <- critical_t2s(m1 = mm[1], m2 = mm[2],
                            sd1 = ss[1], sd2 = ss[2], 
-                           n1 = n[1], n2 = n[2], 
+                           n1 = n[1], n2 = n[2],
+                           hypothesis = hypothesis,
                            var.equal = FALSE)
       }else{
         tt <- critical_t2s(t = t, se = se, n1 = n[1], n2 = n[2], var.equal = TRUE,
@@ -61,6 +62,8 @@ critical.htest <- function(x){
                           conf.level = conf.level)
       x$dz <- tt$dz
       x$dzc <- tt$dzc
+      x$gz <- tt$gz
+      x$gzc <- tt$gzc
     }
 
     d <- tt$d
@@ -112,8 +115,15 @@ print.critvalue <- function(x, digits = getOption("digits"), ...){
   x <- .round_list(x, digits)
   if(inherits(x, "ttest")){
     cat("|== Effect Size and Critical Value ==|", "\n")
-    cat("d =", x$d, "|dc| =", abs(x$dc), "|bc| =", abs(x$bc),"\n")
-    cat("g =", x$g, "|gc| =", abs(x$gc), "\n\n")
+    if(grepl("Paired", x$method)){
+      cat("d =", x$d, "|dc| =", abs(x$dc), "|bc| =", abs(x$bc),"\n")
+      cat("dz =", x$dz, "|dzc| =", abs(x$dzc), "\n")
+      cat("gz =", x$gz, "|gzc| =", abs(x$gzc), "\n\n")
+    }else{
+      cat("d =", x$d, "|dc| =", abs(x$dc), "|bc| =", abs(x$bc),"\n")
+      cat("g =", x$g, "|gc| =", abs(x$gc), "\n\n")
+    }
+    
   }else if(inherits(x, "ctest")){
     cat("|== Critical Value ==|", "\n")
     cat("|rc| =", abs(x$dc),"\n\n")
