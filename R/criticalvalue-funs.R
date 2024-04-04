@@ -12,16 +12,16 @@ crit_from_t_t2s <- function(t = NULL, n1, n2, se = NULL,
     warning("When t is NULL, d cannot be computed, returning NA")
     d <- NA
   }else{
-    d <- t * (1/n1 + 1/n2)
+    d <- t * sqrt(1/n1 + 1/n2)
   }
-  dc <- tc * (1/n1 + 1/n2)
+  dc <- tc * sqrt(1/n1 + 1/n2)
   if(is.null(se)){
     warning("When se = NULL bc cannot be computed, returning NA!")
     bc <- NA
   }else{
     bc <- (tc * se)
   }
-  out <- list(d = d, dc = dc, bc = bc)
+  out <- list(d = d, dc = dc, bc = bc, df = df)
   return(out)
 }
 
@@ -30,24 +30,28 @@ crit_from_data_t2s <- function(m1, m2,
                                n1, n2, 
                                conf.level,
                                hypothesis,
+                               se = NULL,
+                               df = NULL,
                                var.equal = FALSE){
   alpha <- .get_alpha(conf.level, hypothesis)
   b <- m1 - m2
   if(!var.equal){ # welch
     se1 <- sd1 / sqrt(n1)
     se2 <- sd2 / sqrt(n2)
-    se <- sqrt((se1^2 + se2^2)/2)
-    s <- sqrt((sd1^2 * (n1 - 1) + sd2^2 * (n2 - 1))/(n1 + n2 - 2))
-    df <- se^4/(se1^4/(n1-1) + se2^4/(n2-1))
+    if(is.null(se)) se <- sqrt(se1^2 + se2^2)
+    # average sd
+    s <- sqrt((sd1^2 + sd2^2)/2)
+    if(is.null(df)) df <- se^4/(se1^4/(n1-1) + se2^4/(n2-1))
   }else{ # standard
+    # pooled sd
     s <- sqrt((sd1^2 * (n1 - 1) + sd2^2 * (n2 - 1)) / (n1 + n2 - 2))
-    se <- s * (1/n1 + 1/n2)
-    df <- n1 + n2 - 2
+    if(is.null(se)) se <- s * (1/n1 + 1/n2)
+    if(is.null(df)) df <- n1 + n2 - 2
   }
   tc <- abs(qt(alpha, df))
   d <- b / s
   bc <- tc * se
-  dc <- tc * (1/n1 + 1/n2)
+  dc <- tc * sqrt(1/n1 + 1/n2)
   out <- list(d = d, dc = dc, bc = bc, df = df)
   return(out)
 }
@@ -76,11 +80,12 @@ crit_from_t_t1s <- function(t = NULL, n, se = NULL,
   return(out)
 }
 
-crit_from_data_t1s <- function(m, s, n, conf.level, hypothesis){
+crit_from_data_t1s <- function(m, s, n, se = NULL, df = NULL, 
+                               conf.level, hypothesis){
   alpha <- .get_alpha(conf.level, hypothesis)
-  df <- n - 1
+  if(is.null(df)) df <- n - 1
   tc <- abs(qt(alpha, df))
-  se <- s / sqrt(n)
+  if(is.null(se)) se <- s / sqrt(n)
   d <- m / s
   dc <- tc * sqrt(1/n)
   bc <- tc * se
@@ -121,8 +126,9 @@ crit_from_t_t2sp <- function(t = NULL, n, se = NULL, r12 = NULL, hypothesis, con
 
 crit_from_data_t2sp <- function(m1, m2 = NULL, 
                                 sd1, sd2 = NULL, 
-                                se = NULL,
-                                r12 = NULL, n, 
+                                r12 = NULL, 
+                                n,
+                                df = NULL,
                                 conf.level,
                                 hypothesis){
   alpha <- .get_alpha(conf.level, hypothesis)
@@ -184,17 +190,20 @@ critical_t1s <- function(m = NULL, s = NULL, t = NULL,
 critical_t2s <- function(m1 = NULL, m2 = NULL, t = NULL,
                          sd1 = NULL, sd2 = NULL,
                          n1, n2, se = NULL,
+                         df = NULL,
                          var.equal = FALSE,
                          hypothesis = c("two.sided", "greater", "less"),
                          conf.level = 0.95){
   hypothesis <- match.arg(hypothesis)
   if(!is.null(m1) | !is.null(m2)){
-    out <- crit_from_data_t2s(m1, m2, 
-                       sd1, sd2, 
-                       n1, n2, 
-                       conf.level, 
-                       hypothesis, 
-                       var.equal)
+    out <- crit_from_data_t2s(m1 = m1, m2 = m2, 
+                              sd1 = sd1, sd2 = sd2, 
+                              n1 = n1, n2 = n2, 
+                              conf.level = conf.level,
+                              hypothesis = hypothesis,
+                              se = se,
+                              df = df,
+                              var.equal = var.equal)
   }else{
     out <- crit_from_t_t2s(t, 
                     n1, n2, 
