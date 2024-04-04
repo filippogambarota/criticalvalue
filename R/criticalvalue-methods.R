@@ -43,6 +43,7 @@ critical.htest <- function(x){
         tt <- critical_t2s(m1 = mm[1], m2 = mm[2],
                            sd1 = ss[1], sd2 = ss[2], 
                            n1 = n[1], n2 = n[2],
+                           se = se,
                            hypothesis = hypothesis,
                            var.equal = FALSE)
       }else{
@@ -121,10 +122,10 @@ print.critvalue <- function(x, digits = getOption("digits"), ...){
       cat("g =", x$g, "|gc| =", abs(x$gc), "\n")
     } else if(x$alternative == "greater"){
       cat("d =", x$d, "dc =", abs(x$dc), "bc =", abs(x$bc),"\n")
-      cat("g =", x$g, "gc =", abs(x$gc), "\n\n")
+      cat("g =", x$g, "gc =", abs(x$gc), "\n")
     }else{
       cat("d =", x$d, "dc =", -abs(x$dc), "bc =", -abs(x$bc),"\n")
-      cat("g =", x$g, "gc =", -abs(x$gc), "\n\n")
+      cat("g =", x$g, "gc =", -abs(x$gc), "\n")
     }
     
     if(grepl("Paired", x$method)){
