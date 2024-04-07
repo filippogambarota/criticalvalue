@@ -287,7 +287,7 @@ critical_cor <- function(r = NULL, n,
   return(out)
 }
 
-critical_coef_lm <- function(seb, n = NULL, p = NULL,df = NULL,
+critical_coef <- function(seb, n = NULL, p = NULL,df = NULL,
                              conf.level = 0.95,
                              hypothesis = c("two.sided", "greater", "less"),
                              test = c("t", "z")){
@@ -313,5 +313,3 @@ critical_coef_lm <- function(seb, n = NULL, p = NULL,df = NULL,
   out <- list(bc = bc, test = test)
   return(out)
 }
-
-
