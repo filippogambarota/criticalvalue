@@ -2,5 +2,6 @@
 
 S3method(critical,htest)
 S3method(critical,lm)
+S3method(critical,rma)
 S3method(print,critvalue)
 S3method(summary,critvalue)
