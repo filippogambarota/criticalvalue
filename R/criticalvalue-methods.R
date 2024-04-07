@@ -84,6 +84,7 @@ critical.htest <- function(x){
   
   return(x)
 }
+
 #' @export
 critical.lm <- function(x, conf.level = 0.95,
                         standardize = FALSE,
@@ -99,13 +100,32 @@ critical.lm <- function(x, conf.level = 0.95,
   }
   
   se <- sqrt(diag(vcov(x)))
-  ll <- critical_coef_lm(se, df = df, conf.level = conf.level, hypothesis = hypothesis)
+  ll <- critical_coef(se, df = df, conf.level = conf.level, hypothesis = hypothesis)
   d <- NA
   dc <- NA
   x$d <- NA
   x$dc <- NA
   x$bc <- unname(ll$bc)
   class(x) <- c("critvalue", "lm")
+  return(x)
+}
+
+#' @export
+critical.rma <- function(x, conf.level = 0.95, h0 = 0){
+  if(inherits(x, "rma.uni")){
+    hypothesis <- "two.sided"
+    se <- x$se
+    df <- x$k.eff
+    ll <- critical_coef(se, df = df, conf.level = conf.level, hypothesis = hypothesis)
+    d <- NA
+    dc <- NA
+    x$d <- NA
+    x$dc <- NA
+    x$bc <- unname(ll$bc)
+    class(x) <- c("critvalue", "rma.uni", "rma")
+  } else{
+    stop(paste("class", class(x)[1], "not supported yet!"))
+  }
   return(x)
 }
 
@@ -157,6 +177,14 @@ print.critvalue <- function(x, digits = getOption("digits"), ...){
     names(bc) <- names(coef(x))
     print(abs(bc), ...)
     cat("\n")
+  } else if(inherits(x, "rma.uni")){
+    crit <- data.frame(x$b)
+    crit[, 1] <- x$bc
+    if(x$int.only){
+      rownames(crit) <- ""
+    }
+    names(crit) <- "|critical estimate|"
+    cat(capture.output(print(crit)), sep = "\n")
   }
   invisible(x)
 }
@@ -164,16 +192,17 @@ print.critvalue <- function(x, digits = getOption("digits"), ...){
 #' @export
 summary.critvalue <- function(x, ...){
   NextMethod(x, ...)
-  # taken from https://github.com/cran/lm.beta/blob/master/R/summary.lm.beta.R
-  x2 <- x
-  attr(x2, "class") <- "lm"
-  x.summary <- summary(x2, ...)
-  x.summary$coefficients <- cbind(x.summary$coefficients[, 
-                                                         1, drop = F], `|Critical Estimate|` = abs(x$bc), 
-                                  x.summary$coefficients[, -1, drop = F])
-  class(x.summary) <- c("summary.critvalue", class(x.summary))
+  if(inherits(x, "lm")){
+    # taken from https://github.com/cran/lm.beta/blob/master/R/summary.lm.beta.R
+    x2 <- x
+    attr(x2, "class") <- "lm"
+    x.summary <- summary(x2, ...)
+    x.summary$coefficients <- cbind(x.summary$coefficients[, 
+                                                           1, drop = F], `|Critical Estimate|` = abs(x$bc), 
+                                    x.summary$coefficients[, -1, drop = F])
+    class(x.summary) <- c("summary.critvalue", class(x.summary))
+  } else if(inherits(x, "rma.uni")){
+    x.summary <- x
+  }
   x.summary
 }
-
-
-
