@@ -138,8 +138,8 @@ print.critvalue <- function(x, digits = getOption("digits"), ...){
   if(inherits(x, "ttest")){
     cat("|== Effect Size and Critical Value ==|", "\n")
     if(x$alternative == "two.sided"){
-      cat("d =", x$d, "|dc| =", abs(x$dc), "|bc| =", abs(x$bc),"\n")
-      cat("g =", x$g, "|gc| =", abs(x$gc), "\n")
+      cat("d =", x$d, "dc = ±", abs(x$dc), "bc = ±", abs(x$bc),"\n")
+      cat("g =", x$g, "gc = ±", abs(x$gc), "\n")
     } else if(x$alternative == "greater"){
       cat("d =", x$d, "dc =", abs(x$dc), "bc =", abs(x$bc),"\n")
       cat("g =", x$g, "gc =", abs(x$gc), "\n")

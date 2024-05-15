@@ -1,3 +1,6 @@
+#' Title
+#' @export
+#'
 crit_from_t_t2s <- function(t = NULL, n1, n2, se = NULL,
                             conf.level, 
                             hypothesis,
