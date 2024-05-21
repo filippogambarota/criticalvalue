@@ -1,12 +1,21 @@
-
-
+#' critical
+#' @description
+#' describe the function
+#' @param x an object of class htest, rma or lm
+#' @param ... other arguments passed for the specific method
+#' @return a object of class critvalue
 #' @export
 critical <- function(x, ...){
   UseMethod("critical")
 }
 
+
+#' critical.htest
+#' @description
+#' una bellissima funzione
+#' @param x an object of class htest
 #' @export
-critical.htest <- function(x){
+critical.htest <- function(x, type = NULL){
   # all implemented subtype of htest objects
   mtds <- c("Two Sample", "One Sample", "correlation", "Paired")
   
