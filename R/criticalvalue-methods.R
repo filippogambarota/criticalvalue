@@ -1,3 +1,6 @@
+
+
+#' @export
 critical <- function(x, ...){
   UseMethod("critical")
 }
