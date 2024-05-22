@@ -1,19 +1,20 @@
-#' critical
-#' @description
-#' describe the function
-#' @param x an object of class htest, rma or lm
-#' @param ... other arguments passed for the specific method
-#' @return a object of class critvalue
+
+#' Compute critical effect size values for a range of different objects
+#' @description Compute critical effect size values for objects of classes htest (Student's t-test, correlation test), lm, or rma
+#' @param x an object of class htest (available for t.test, cor.test), lm (a linear regression model), or rma (a meta-analytic linear model fitted with the "metafor" package)
+#' @param ... other arguments passed for the specific method, depending on the class of the object x
+#' @return an object of class critvalue
 #' @export
 critical <- function(x, ...){
   UseMethod("critical")
 }
 
 
-#' critical.htest
-#' @description
-#' una bellissima funzione
-#' @param x an object of class htest
+#' Compute critical effect size values for t-test and correlation tests
+#' @description Compute critical effect size values for objects of classes htest computed with t.test or cor.test
+#' @param x an object of class htest (available for t.test, cor.test)
+#' @param type a value among "Two Sample", "One Sample", "correlation", "Paired"
+#' @return an object of class critvalue
 #' @export
 critical.htest <- function(x, type = NULL){
   # all implemented subtype of htest objects
@@ -97,6 +98,12 @@ critical.htest <- function(x, type = NULL){
   return(x)
 }
 
+
+#' Compute critical effect size values for linear regression models
+#' @description Compute critical effect size values for linear model coefficients of objects of class lm
+#' @param x an object of class lm
+#' @param conf.level the confidence interval level, needed to compute the smallest significant coefficient (default is 0.95, equaling a critical alpha = 0.05)
+#' @return an object of class critvalue
 #' @export
 critical.lm <- function(x, conf.level = 0.95,
                         standardize = FALSE,
@@ -122,8 +129,14 @@ critical.lm <- function(x, conf.level = 0.95,
   return(x)
 }
 
+
+#' Compute critical effect size values for meta-analytic linear models
+#' @description Compute critical effect size values for coefficients of objects of class rma (fitted with the "metafor" package)
+#' @param x an object of class rma
+#' @param conf.level the confidence interval level, needed to compute the smallest significant coefficient (default is 0.95, equaling a critical alpha = 0.05)
+#' @return an object of class critvalue
 #' @export
-critical.rma <- function(x, conf.level = 0.95, h0 = 0){
+critical.rma <- function(x, conf.level = 0.95){
   if(inherits(x, "rma.uni")){
     hypothesis <- "two.sided"
     se <- x$se

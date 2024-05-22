@@ -264,7 +264,7 @@ crit_from_data_t2sp <- function(m1, m2 = NULL,
 
 #' critical_t1s
 #' @description
-#' The function allows to calculate cohen's d and critical d for a one sample t-test.
+#' The function allows to calculate cohen's d and critical d for a one-sample t-test.
 #' 
 #' @param m a number representing the mean of the group.
 #' @param s Variance
