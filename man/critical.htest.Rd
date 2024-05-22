@@ -2,13 +2,18 @@
 % Please edit documentation in R/criticalvalue-methods.R
 \name{critical.htest}
 \alias{critical.htest}
-\title{critical.htest}
+\title{Compute critical effect size values for t-test and correlation tests}
 \usage{
 \method{critical}{htest}(x, type = NULL)
 }
 \arguments{
-\item{x}{an object of class htest}
+\item{x}{an object of class htest (available for t.test, cor.test)}
+
+\item{type}{a value among "Two Sample", "One Sample", "correlation", "Paired"}
+}
+\value{
+an object of class critvalue
 }
 \description{
-una bellissima funzione
+Compute critical effect size values for objects of classes htest computed with t.test or cor.test
 }

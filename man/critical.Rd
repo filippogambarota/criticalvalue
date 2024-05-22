@@ -2,18 +2,18 @@
 % Please edit documentation in R/criticalvalue-methods.R
 \name{critical}
 \alias{critical}
-\title{critical}
+\title{Compute critical effect size values for a range of different objects}
 \usage{
 critical(x, ...)
 }
 \arguments{
-\item{x}{an object of class htest, rma or lm}
+\item{x}{an object of class htest (available for t.test, cor.test), lm (a linear regression model), or rma (a meta-analytic linear model fitted with the "metafor" package)}
 
-\item{...}{other arguments passed for the specific method}
+\item{...}{other arguments passed for the specific method, depending on the class of the object x}
 }
 \value{
-a object of class critvalue
+an object of class critvalue
 }
 \description{
-describe the function
+Compute critical effect size values for objects of classes htest (Student's t-test, correlation test), lm, or rma
 }

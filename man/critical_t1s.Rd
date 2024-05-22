@@ -33,5 +33,5 @@ critical_t1s(
 the output returns, based on the inserted values, mean, variance, confidence interval and hypothesis or t-value, numerosity, standard error, confidence interval and hypothesis.
 }
 \description{
-The function allows to calculate cohen's d and critical d for a one sample t-test.
+The function allows to calculate cohen's d and critical d for a one-sample t-test.
 }
