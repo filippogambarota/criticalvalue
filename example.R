@@ -36,6 +36,3 @@ pwr::pwr.t.test(n=500,power=0.8)
 metafor:::.cmicalc()
 
 
-# prova di modifica
-
-#perchè non funziona
