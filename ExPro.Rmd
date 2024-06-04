@@ -1,94 +1,105 @@
-\documentclass{article}
+---
+title: "Examples for Paper"
+output: html_document
+---
 
-\begin{document}
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
 
 To install the package the following line of code is needed.
 
-<<>>=
+```{r load}
 devtools::load_all()
 
 # require(devtools)
-devtools::install_github("filippogambarota/criticalvalue")
+#devtools::install_github("filippogambarota/criticalvalue")
 
-@
+
+```
+
+## Examples on real data
 
 Four our examples on real data we used prom the package 'psych' the dataset "holzinger.swineford" which has a series of demografics and scores of different subtests measuring intelligence. Once the package is retrieved with the 'library' command, the dataset can be opened using the 'data' function. For simplicity we decided to rename it with a shorter name.
 
-<<>>=
+```{r open data}
 library(psych)
 library(psychTools)
 
 data("holzinger.swineford")
 Holz <- holzinger.swineford
-@
+```
 
 Critical value for correlation from a cor.test object.
 
-<<>>=
+```{r correlation}
 cc<-cor.test(Holz$t01_visperc, Holz$t02_cubes)
 critical(cc)
 critical.htest(cc)
-@
+```
 
-In this first example we show how to calculate the critical value for a correlation test. We correlated two cognitive measures: visual perception and the cubes sub-test. It can be done by using firstly the 'cor.test' function and then putting the newly created object into the 'critical' function. The output will add, underneath the usual output of the 'cor.test' function, the absolute critical value (|rc|). The number represents the smallest significant effect. The same output can be obtained with the function 'critical.htest'.
+In this first example we show how to calculate the critical value for a correlation test. We correlated two cognitive measures: visual perception and the cubes sub-test. It can be done by using firstly the 'cor.test' function and then putting the newly created object into the 'critical' function. The output will add, underneath the usual output of the 'cor.test' function, the absolute critical value (rc). The number represents the smallest significant effect. The same output can be obtained with the function 'critical.htest'.
 
 Critical value for t-test from real data
 
-<<>>=
+```{r}
 tt <- t.test(Holz$t01_visperc [ Holz$female == 1], Holz$t01_visperc [ Holz$female == 2])
 critical(tt)
 critical.htest(tt)
-@
+```
 
 In this example we performed a t-test comparing boys and girls on a cognitive variable of visual perception, as we assume gender differences. In this case, it can be easily done with the same procedure using the 't.test' function and putting the object inside either 'critical' or 'critical.htest'. The output now gives a wider range of values: the cohen's d calculated on the data (d), the critical cohen's d (dc), the numerator of the formula for the critical cohen's d (bc), the cohen's d adjusted for small samples (g) and the critical cohen's d adjusted for small samples (gc).
 
 Critical value for linear model from real data
 
-<<>>=
+```{r}
 ll <- lm( t01_visperc ~ ageyr , data = Holz)
 summary(critical(ll))
-@
+```
 
 In this last example, we expect the cognitive task to vary as a function of age. As the output shows, there is no relation between the sub-test and age because the scores are standardized. First, the model needs to be created and saved in an object, then it should be passed into the 'critical' function and wrapped in the 'summary' function.
+
+
+## Examples with sample size
 
 In the next examples we will show the use of the package's functions to calculate critical values in a prospective framework. Imagine having to plan a study and there can be different scenarios. Given external constrains on sample size, the question could be on which model can be implemented to find a significant interest, meaning that it might be the case that with a small sample, it would be better to opt for a simples study design. Or in another scenario we want to know the sample that would allow us to get a significant result under certain conditions and the smallest significant effect could tell us if the planned sample gives a realistic smallest effect. With a sample of 30 subjects, the critical cohen's d is of .62, which might be unrealistic for certain psychological variables. In an opposite scenario, with a sample size of 2400 subjects, the critical d would be of .06, would that be relevant in a comparison of gender differences? It is important to think about what sample we need to find a significant effect given a reasonable effect of interest. In the following examples we will give an outlook of the use of the functions to answer the aforesaid questions.
 
 Critical t value from sample size
 
-<<>>=
+```{r t from n, echo=FALSE}
 n <- 1200
 critical_t2s(n1 = n , n2 = n , hypothesis = "less")
-@
+```
 
 This example shows how to compute a critical value for a t-test with the 'critical_t2s' function in which the hypothesis can be specified as "less", "greater" and "two.tailed". In output we can find the critical d and the critical g, the adjusted d for small samples.
 
-Critical t value from sample size for a paired t-test
+Critical t value from sample size for a paired t-test.
 
-<<>>=
+```{r}
 n <- 15
 critical_t2sp(n = n , hypothesis = "less")
-@
+```
 
 In the case of test-retest, for example the pre-post treatment, we are comparing the same subjects at two different time points. It is possible with the 'critical_t2sp' function to calculate the standardized and un-standardized critical cohen's d, and the critical cohen's d adjusted for small samples both standardized and un-standardized.
 
 Critical value for a correlation from sample size 
 
-<<>>=
+```{r}
 n <- 60
 critical_cor(n = n, hypothesis = "two.sided", test = "z")
-@
+```
 
 For a correlation, the function 'critical_cor' can be used to get the critical value specifying the sample size, the direction of the hypothesis and the test to apply, either t-test or z-test.
 
 Critical value of a beta from a model
 
-<<>>=
+```{r}
 n <- 170
 critical_coef(seb = .1, n = n, p = .01, conf.level = .95, hypothesis = "less")
-@
+```
 
 With the function 'critical_coef' one can calculate the critical beta by specifying sample size, standard error of the estimate, p-value, confidence level and hypothesis.
 
 
-
-\end{document}
