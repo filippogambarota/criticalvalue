@@ -219,7 +219,7 @@ crit_from_t_t2sp <- function(t = NULL, n, se = NULL, r12 = NULL, hypothesis, con
 #' @param conf.level confidence level of the interval.
 #' @param hypothesis a character string indicating the alternative hypothesis ("less", "greater" or "two.tailed").
 #'
-#' @return the output returns a "dz" which is the d standartized on the standard deviation of the differencens, the "dzc" is the critical standardized d, the "d" is the cohen's d, the critical d which is the minimum value for which to get a significant result with a given sample, the "bc" is the numerator of the formula from which the d is calculated and "df" are the degrees of freedom.
+#' @return the output returns a "dz" which is the d standartized on the standard deviation of the differences, the "dzc" is the critical standardized d, the "d" is the cohen's d, the critical d which is the minimum value for which to get a significant result with a given sample, the "bc" is the numerator of the formula from which the d is calculated and "df" are the degrees of freedom.
 #' @export
 #'
 #' @examples
@@ -376,7 +376,7 @@ critical_t2s <- function(m1 = NULL, m2 = NULL, t = NULL,
 #' @param hypothesis a character string indicating the alternative hypothesis ("less", "greater" or "two.tailed").
 #' @param conf.level the confidence level to set the confidence interval, default is set to 0.95.
 #'
-#' @return the output returns, based on the inserted values, means of the two groups, standard deviations of the two groups, numerosity, standard error, correlation between the variables, confidence level and hypothesis or t-value, numerosity, standard error, correlation between the variables, hypothesis and confidence iterval.
+#' @return the output returns, based on the inserted values, means of the two groups, standard deviations of the two groups, numerosity, standard error, correlation between the variables, confidence level and hypothesis or t-value, numerosity, standard error, correlation between the variables, hypothesis and confidence interval.
 #' @export
 #'
 #' @examples
