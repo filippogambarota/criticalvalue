@@ -359,7 +359,7 @@ devtools::install_github(&quot;filippogambarota/criticalvalue&quot;)</code></pre
 <div id="examples-on-real-data" class="section level2">
 <h2>Examples on real data</h2>
 <p>For our examples on real data we used from the package ‘psych’ the
-dataset “holzinger.swineford” which has a series of demografics and
+dataset “holzinger.swineford” which has a series of demographics and
 scores of different subtests measuring intelligence on 301 subjects.
 Once the package is retrieved with ‘library’, the dataset can be opened
 using ‘data(“name of the dataset”)’. For simplicity we decided to rename
@@ -376,8 +376,8 @@ Holz &lt;- holzinger.swineford</code></pre>
 <div id="critical-value-for-correlation" class="section level4">
 <h4>Critical value for correlation</h4>
 <p>In the following chunk we want to get the critical value for a
-correlation of two cognitive tests of 301 subjects. We can do so with
-the ‘critical’ function:</p>
+correlation of two cognitive sub-tests of 301 subjects. We can do so
+with the ‘critical’ function:</p>
 <pre class="r"><code>cc &lt;- cor.test(Holz$t01_visperc, Holz$t02_cubes)
 critical(cc)</code></pre>
 <pre><code>## 
@@ -397,15 +397,15 @@ critical(cc)</code></pre>
 <p>First, the ‘cor.test’ function should be used on the two variables of
 interest and then the newly created object should be put into the
 ‘critical’ function. The output will add, underneath the usual output of
-the ‘cor.test’ function, the absolute critical value (rc). The number
-represents the smallest significant effect.</p>
+the ‘cor.test’ function, the absolute critical value (rc), representing
+the smallest significant effect.</p>
 </div>
 <div id="critical-value-for-t-test" class="section level4">
 <h4>Critical value for t-test</h4>
 <p>Now we want to know the critical value for a t-test comparing boys
-and girls on a cognitive variable of visual perception, as we assume
-gender differences. In this case, it can be easily done with the same
-procedure using the ‘t.test’ function:</p>
+and girls on a cognitive variable of visual perception. In this case, it
+can be easily done with the same procedure using the ‘t.test’
+function:</p>
 <pre class="r"><code>tt &lt;- t.test(Holz$t01_visperc [ Holz$female == 1], Holz$t01_visperc [ Holz$female == 2])
 critical(tt)</code></pre>
 <pre><code>## 
@@ -455,7 +455,7 @@ summary(critical(ll))</code></pre>
 ## Multiple R-squared:  0.003597,   Adjusted R-squared:  0.0002647 
 ## F-statistic: 1.079 on 1 and 299 DF,  p-value: 0.2997</code></pre>
 <p>In the output, a column will appear next to the usual column of the
-Estimates reporting critical values for both the Intercept and the
+estimates reporting critical values for both the intercept and the
 predictor(s).</p>
 </div>
 </div>
@@ -486,7 +486,7 @@ critical_t2s(n1 = n , n2 = n , hypothesis = &quot;less&quot;)</code></pre>
 ## [1] 0.06715581</code></pre>
 <p>The function requires to specify the hypothesis as “less”, “greater”
 or “two.tailed”. In output we can find the critical d and the critical
-g, the adjusted d for small samples.</p>
+g, which is the cohen’s d adjusted for small samples.</p>
 </div>
 <div id="critical-t-value-from-sample-size-for-a-paired-t-test." class="section level4">
 <h4>Critical t value from sample size for a paired t-test.</h4>
@@ -519,9 +519,10 @@ critical_t2sp(n = n , hypothesis = &quot;less&quot;, conf.level = .95)</code></p
 ## $gzc
 ## [1] 0.4298869</code></pre>
 <p>Specifying the direction of the hypothesis and the confidence
-interval, the function will give as output the standardized and
-un-standardized critical cohen’s d, and the critical cohen’s d adjusted
-for small samples both standardized and un-standardized.</p>
+interval, the function will give as output the standardized (dzc) and
+un-standardized (dc) critical cohen’s d, and the critical cohen’s d
+adjusted for small samples both standardized (gc) and un-standardized
+(gzc).</p>
 </div>
 <div id="critical-value-for-a-correlation-from-sample-size" class="section level4">
 <h4>Critical value for a correlation from sample size</h4>
