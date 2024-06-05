@@ -353,17 +353,17 @@ display: none;
 </div>
 
 
-<p>To install the package the following line of code is needed.</p>
+<p>To install the package the following line of code is needed:</p>
 <pre class="r"><code># require(devtools)
 devtools::install_github(&quot;filippogambarota/criticalvalue&quot;)</code></pre>
 <div id="examples-on-real-data" class="section level2">
 <h2>Examples on real data</h2>
-<p>Four our examples on real data we used prom the package ‘psych’ the
+<p>For our examples on real data we used from the package ‘psych’ the
 dataset “holzinger.swineford” which has a series of demografics and
-scores of different subtests measuring intelligence. Once the package is
-retrieved with the ‘library’ command, the dataset can be opened using
-the ‘data’ function. For simplicity we decided to rename it with a
-shorter name.</p>
+scores of different subtests measuring intelligence on 301 subjects.
+Once the package is retrieved with ‘library’, the dataset can be opened
+using ‘data(“name of the dataset”)’. For simplicity we decided to rename
+it with a shorter name.</p>
 <pre class="r"><code>library(psych)</code></pre>
 <pre><code>## 
 ## Attaching package: &#39;psych&#39;</code></pre>
@@ -373,8 +373,8 @@ shorter name.</p>
 <pre class="r"><code>library(psychTools)</code></pre>
 <pre class="r"><code>data(&quot;holzinger.swineford&quot;)
 Holz &lt;- holzinger.swineford</code></pre>
-<div id="critical-value-for-correlation-from-a-cor.test-object" class="section level4">
-<h4>Critical value for correlation from a cor.test object</h4>
+<div id="critical-value-for-correlation" class="section level4">
+<h4>Critical value for correlation</h4>
 <p>In the following chunk we want to get the critical value for a
 correlation of two cognitive tests of 301 subjects. We can do so with
 the ‘critical’ function:</p>
@@ -400,8 +400,8 @@ interest and then the newly created object should be put into the
 the ‘cor.test’ function, the absolute critical value (rc). The number
 represents the smallest significant effect.</p>
 </div>
-<div id="critical-value-for-t-test-from-real-data" class="section level4">
-<h4>Critical value for t-test from real data</h4>
+<div id="critical-value-for-t-test" class="section level4">
+<h4>Critical value for t-test</h4>
 <p>Now we want to know the critical value for a t-test comparing boys
 and girls on a cognitive variable of visual perception, as we assume
 gender differences. In this case, it can be easily done with the same
@@ -429,8 +429,8 @@ of the formula for the critical cohen’s d (bc), the cohen’s d adjusted
 for small samples (g) and the critical cohen’s d adjusted for small
 samples (gc).</p>
 </div>
-<div id="critical-value-for-linear-model-from-real-data" class="section level4">
-<h4>Critical value for linear model from real data</h4>
+<div id="critical-value-for-linear-model" class="section level4">
+<h4>Critical value for linear model</h4>
 <p>Now we want to calculate the critical coefficients for a linear model
 with visual perception predicted by age. We can do so by wrapping the
 ‘critical’ function into the ‘summary’ function:</p>
@@ -523,8 +523,8 @@ interval, the function will give as output the standardized and
 un-standardized critical cohen’s d, and the critical cohen’s d adjusted
 for small samples both standardized and un-standardized.</p>
 </div>
-<div id="critical-value-for-a-correlation" class="section level4">
-<h4>Critical value for a correlation</h4>
+<div id="critical-value-for-a-correlation-from-sample-size" class="section level4">
+<h4>Critical value for a correlation from sample size</h4>
 <p>The same can be done for the critical value for a correlation on a
 defined sample size with the ‘critical_cor’ function:</p>
 <pre class="r"><code>n &lt;- 60
@@ -542,8 +542,8 @@ either t-test or z-test, should be specified. The output will return the
 critical correlation value, the degrees of freedom and the type of test
 used, which should be specified from the user.</p>
 </div>
-<div id="critical-value-of-a-beta-from-a-model" class="section level4">
-<h4>Critical value of a beta from a model</h4>
+<div id="critical-value-of-a-beta-from-a-model-from-saple-size" class="section level4">
+<h4>Critical value of a beta from a model from saple size</h4>
 <p>Let us say that we want to know the critical beta of a model, we can
 use the ‘critical_coef’ function as shown in the following chunk:</p>
 <pre class="r"><code>n &lt;- 170
