@@ -103,7 +103,7 @@ n <- 60
 critical_cor(n = n, hypothesis = "two.sided", test = "z")
 ```
 
-Once more, the direction of the hypothesis and the test to apply, either t-test or z-test, should be specified. The output will return the critical correlation value, the degrees of freedom and the type of test used, which should be specified from the user.
+Once more, the direction of the hypothesis and the test to apply, either t-test or z-test, should be specified. The output will return the critical correlation value, the degrees of freedom and the type of test used.
 
 #### Critical value of a beta from a model from saple size
 
