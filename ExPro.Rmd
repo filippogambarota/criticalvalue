@@ -19,7 +19,7 @@ devtools::load_all()
 ```{r load, eval=FALSE}
 # require(devtools)
 devtools::install_github("filippogambarota/criticalvalue")
-
+library(criticalvalue)
 ```
 
 ## Examples on real data
