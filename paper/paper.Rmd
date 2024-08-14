@@ -57,8 +57,9 @@ affiliation:
     institution: "Department of Statistics, University of Padova, Italy"
 
 abstract: |
-  Scrivere abstract
-keywords          : "keywords"
+  Critical effect size values represent the smallest detectable effect that would reach statistical significance given a certain sample size. These values are highly applicable in various scenarios, as they do not require specifying a plausible effect size of interest. Reporting critical effect size values may be especially useful when adopting NHST (Null Hypothesis Significance Testing) and the sample size has not been planned a priori, or when there is uncertainty on the expected effect size. To assist researchers in calculating critical values, we have developed an R package that allows to report the critical effect size values of model parameters. The package's functions are implemented for group comparisons, correlations, linear regression, and meta-analysis. What we propose could benefit researchers during the planning phase of the study by helping them to understand the limitations and strengths of their research design, and also as a retrospective tool to potentially reframe original interpretations. 
+
+keywords          : critical effect size values, statistical significance, fucntions implementation 
 wordcount         : "X"
 
 bibliography      : "bibliography.bib"
@@ -96,6 +97,7 @@ header-includes:
 knitr::opts_chunk$set(echo = TRUE,
                       comment = "#>")
 ```
+
 
 In the present paper, we suggest that researchers systematically report the critical effect size values when they make inference using statistical significance. The "critical effect size values" refers to the smallest statistically significant effect sizes, which depends on the test performed and the characteristics of the sample [@lakens2022sample]. To cut to the chase, let us consider a study that tests (using for example a two-tailed test) a bivariate correlation with $n = 20$ participants and uses $p < 0.05$ as the threshold for statistical significance: in this case, the smallest significant effects (critical values) are Pearson's $r = -0.44$ and $r = 0.44$. As we will argue, the critical values can serve as a useful complement to aid in the interpretation of study results, communicate their relevance, help assessing their replicability, particularly when statistical significance is relied upon for inference. This is especially important in cases where the sample size was not (or could not) be predetermined based on a theory-driven target effect size or when statistical power may be difficult to determine or deviates from an optimal level. 
 
