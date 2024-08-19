@@ -11,16 +11,19 @@ author:
   - name          : "Filippo Gambarota"
     affiliation   : "1"
     role:
+      - "Writing – Original Draft Preparation"
       - "Writing - Review & Editing"
-      - "Supervision"
+      - "Methodology"
   - name          : "Enrico Toffalini"
     affiliation   : "2"
     role:
+      - "Writing – Original Draft Preparation"
       - "Writing - Review & Editing"
       - "Supervision"
   - name          : "Daniël Lakens"
     affiliation   : "3"
     role:
+      - "Conceptualization"
       - "Writing - Review & Editing"
       - "Supervision"
   - name          : "Massimiliano Pastore"
@@ -44,6 +47,7 @@ author:
     address       : "Via Venezia 8, 35131, Padova, Italy"
     email         : "gianmarco.altoe@unipd.it"
     role:
+      - "Conceptualization"
       - "Writing - Review & Editing"
       - "Supervision"
 affiliation:
