@@ -29,16 +29,19 @@ author:
   - name          : "Massimiliano Pastore"
     affiliation   : "1"
     role:
+      - "Conceptualization"
       - "Writing - Review & Editing"
       - "Supervision"
   - name          : "Livio Finos"
     affiliation   : "4"
     role:
+      - "Conceptualization"
       - "Writing - Review & Editing"
       - "Supervision"
   - name          : "Psicostat"
     affiliation   : "1"
     role:
+      - "Conceptualization"
       - "Writing - Review & Editing"
       - "Supervision"
   - name          : "Gianmarco Altoè"
@@ -121,7 +124,7 @@ To provide more tangible illustrations of the practical application of critical 
 
 # How to Compute Critical Effect Size Values
 
-In this section, we provide guidance and formulas for computing critical values in general, with examples for frequently encountered effect sizes including Standardized Mean Differences (Cohen's $d$), correlations (Pearson's r), and raw and standardized coefficients in linear models. These formulas have been incorporated into R functions of the package "criticalESvalues" accessible at: [xxxxx], and are elaborated upon in the subsequent section.
+In this section, we provide guidance and formulas for computing critical values in general, with examples for frequently encountered effect sizes including Standardized Mean Differences (Cohen's $d$), correlations (Pearson's r), and raw and standardized coefficients in linear models. These formulas have been incorporated into R functions of the package "criticalESvalues" accessible at: https://github.com/filippogambarota/criticalvalue, and are elaborated upon in the subsequent section.
 
 ## t-test
 
@@ -238,7 +241,7 @@ Despite we discussed only linear models, the same approach could be theoreticall
     
 # Examples in R
 
-In this section, we introduce a user-friendly implementation of the aforementioned mathematical computations as functions of the package "criticalESvalues" in R. The complete package can be accessed at: [xxxx]. Here, we demonstrate its application through two examples: one example of a t-test on real data and a computation of the critical value for a correlation from sample size. In the Supplementary online materials additional examples can be found for correlation, t-test, paired t-test, linear models and regression coefficients, both from data and from sample size.
+In this section, we introduce a user-friendly implementation of the aforementioned mathematical computations as functions of the package "criticalESvalues" in R. The complete package can be accessed at: https://github.com/filippogambarota/criticalvalue. Here, we demonstrate its application through two examples: one example of a t-test on real data and a computation of the critical value for a correlation from sample size. In the Supplementary online materials additional examples can be found for correlation, t-test, paired t-test, linear models and regression coefficients, both from data and from sample size.
 
 First the package should be downloaded and opened with the library function:
 
