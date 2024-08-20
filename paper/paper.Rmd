@@ -8,6 +8,7 @@ author:
       - "Conceptualization"
       - "Writing - Original Draft Preparation"
       - "Writing - Review & Editing"
+      - "Methodology"
       - "Software"
   - name          : "Filippo Gambarota"
     affiliation   : "1"
@@ -127,7 +128,7 @@ To provide more tangible illustrations of the practical application of critical 
 
 # How to Compute Critical Effect Size Values
 
-In this section, we provide guidance and formulas for computing critical values in general, with examples for frequently encountered effect sizes including Standardized Mean Differences (Cohen's $d$), correlations (Pearson's r), and raw and standardized coefficients in linear models. These formulas have been incorporated into R functions of the package "criticalvalue" accessible at: https://github.com/filippogambarota/criticalvalue, and are elaborated upon in the subsequent section.
+In this section, we provide guidance and formulas for computing critical values in general, with examples for frequently encountered effect sizes including Standardized Mean Differences (Cohen's $d$), correlations (Pearson's r), and raw and standardized coefficients in linear models. These formulas have been incorporated into R functions of the package "criticalESvalue" accessible at: https://github.com/psicostat/criticalESvalue, and are elaborated upon in the subsequent section.
 
 ## t-test
 
@@ -244,7 +245,7 @@ Despite we discussed only linear models, the same approach could be theoreticall
     
 # Examples in R
 
-In this section, we introduce a user-friendly implementation of the aforementioned mathematical computations as functions of the package "criticalvalue" in R. The complete package can be accessed at: https://github.com/filippogambarota/criticalvalue. Here, we demonstrate its application through two examples: one example of a t-test on real data and a computation of the critical effect size values for a correlation from sample size. It is important to note that, in general, depending on the researcher's hypotheses, the package allows for the calculation of either two critical effect size values for two-tailed tests or a single critical effect size value for one-tailed tests, for which the direction must be specified. In the Supplementary online materials additional examples can be found for correlation, t-test, paired t-test, linear models and regression coefficients.
+In this section, we introduce a user-friendly implementation of the aforementioned mathematical computations as functions of the package "criticalESvalue" in R. The complete package can be accessed at: https://github.com/psicostat/criticalESvalue. Here, we demonstrate its application through two examples: one example of a t-test on real data and a computation of the critical effect size values for a correlation from sample size. It is important to note that, in general, depending on the researcher's hypotheses, the package allows for the calculation of either two critical effect size values for two-tailed tests or a single critical effect size value for one-tailed tests, for which the direction must be specified. In the Supplementary online materials additional examples can be found for correlation, t-test, paired t-test, linear models and regression coefficients.
 
 First the package should be downloaded and opened with the library function:
 

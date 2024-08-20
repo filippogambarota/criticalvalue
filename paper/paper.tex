@@ -240,7 +240,7 @@
 
 \authornote{
 
-The authors made the following contributions. Ambra Perugini: Conceptualization, Writing - Original Draft Preparation, Writing - Review \& Editing; Filippo Gambarota: Writing -- Original Draft Preparation, Writing - Review \& Editing, Methodology; Enrico Toffalini: Writing -- Original Draft Preparation, Writing - Review \& Editing, Supervision; Daniël Lakens: Conceptualization, Writing - Review \& Editing, Supervision; Massimiliano Pastore: Conceptualization, Writing - Review \& Editing, Supervision; Livio Finos: Conceptualization, Writing - Review \& Editing, Supervision; Psicostat: Conceptualization, Writing - Review \& Editing, Supervision; Gianmarco Altoè: Conceptualization, Writing - Review \& Editing, Supervision.
+The authors made the following contributions. Ambra Perugini: Conceptualization, Writing - Original Draft Preparation, Writing - Review \& Editing, Methodology, Software; Filippo Gambarota: Writing -- Original Draft Preparation, Writing - Review \& Editing, Methodology, Software; Enrico Toffalini: Writing -- Original Draft Preparation, Writing - Review \& Editing, Software, Supervision; Daniël Lakens: Conceptualization, Writing - Review \& Editing, Supervision; Massimiliano Pastore: Conceptualization, Writing - Review \& Editing, Supervision; Livio Finos: Conceptualization, Writing - Review \& Editing, Supervision; Psicostat: Conceptualization, Writing - Review \& Editing, Supervision; Gianmarco Altoè: Conceptualization, Writing - Review \& Editing, Supervision.
 
 Correspondence concerning this article should be addressed to Gianmarco Altoè, Via Venezia 8, 35131, Padova, Italy. E-mail: \href{mailto:gianmarco.altoe@unipd.it}{\nolinkurl{gianmarco.altoe@unipd.it}}
 
@@ -263,7 +263,7 @@ Despite longstanding criticisms, the Null Hypothesis Significance Testing (NHST)
 
 In psychology, power is often severely limited for medium to small effect sizes (Szucs \& Ioannidis, 2017), which are generally expected to represent true replicable findings. In fact, resource constraints have been authoritatively listed among acceptable justifications for sample size (Lakens, 2022), and this scenario is arguably widespread in psychology. However, limited power makes it challenging to distinguish signal from noise, and on average it results in an overestimation of effect sizes when relying on statistical significance for inference (Altoè et al., 2020). On the other hand, very large samples are occasionally available in psychological science, albeit less frequently. However, as some have argued, excessively large sample sizes risk creating an ``everything-is-significant'' scenario, where researchers report and discuss practically negligible effects solely because they are statistically significant, regardless of theoretical relevance or whether they just reflect minor procedural artifacts (Wilson et al., 2020). Thus, while statistical significance can serve as a potentially useful filter, relying solely on it for inference may introduce risks in interpretation. In such cases, we contend that reporting critical values can help put into perspective and convey the relevance of the results.
 
-There are two clear benefits of reporting the critical effect size for a corresponding test. First, when sample sizes are smaller, the critical values inform readers about whether the effect sizes that could lead to a rejection of the null hypothesis are in line with realistic expectations. If the sample size is small, and only very large effects would yield a statistically significant result, and the underlying mechanism that is examined is unlikely to lead to such large effect sizes, in these cases, researchers will realized they are not able to collect sufficient data to perform a meaningful test. An a-priori power analysis would typically lead to a similar conclusion, but reporting the critical effect sizes focuses the attention more strongly on which effect sizes are reasonable to expect. Second, in large studies the critical effect sizes will make clear that trivially small effect sizes will be statistically significant. This will focus the attention of researchers on the difference between statistical significance and practical significance. This is especially important in correlational studies on large samples in psychology, where small uncontrolled sources of statistical noise may simultaneously affect and create some shared variance across otherwise unrelated variables, a phenomenon controversially labelled as the `crud factor' (Orben \& Lakens, 2020).
+There are two clear benefits of reporting the critical effect size for a corresponding test. First, when sample sizes are small, the critical values inform readers about whether the effect sizes that could lead to a rejection of the null hypothesis are in line with realistic expectations. If the sample size is small, and only very large effects would yield a statistically significant result, and the underlying mechanism that is examined is unlikely to lead to such large effect sizes, in these cases, researchers will realized they are not able to collect sufficient data to perform a meaningful test. An a-priori power analysis would typically lead to a similar conclusion, but reporting the critical effect sizes focuses the attention more strongly on which effect sizes are reasonable to expect. Second, in large studies the critical effect sizes will make clear that trivially small effect sizes will be statistically significant. This will focus the attention of researchers on the difference between statistical significance and practical significance. This is especially important in correlational studies on large samples in psychology, where small uncontrolled sources of statistical noise may simultaneously affect and create some shared variance across otherwise unrelated variables, a phenomenon controversially labelled as the `crud factor' (Orben \& Lakens, 2020).
 
 Let us consider the following two scenarios as examples. First, imagine researchers conducting a study involving a between-group comparison. Due to severe resource constraints, they are only able to collect a limited sample size of \(n = 30\) (\(n = 15\) per group). No statistically significant effect is detected with \(p < 0.05\). Given their prior expectation that the effect of interest may not be large, they acknowledge that their study was likely underpowered, though uncertain to some extent. Subsequently, they compute the critical values, revealing Cohen's \(d = -0.75\) and \(d = 0.75\). This indicates that any estimated \textbar Cohen's \(d| < 0.75\) will certainly fail to reach statistical significance. By reporting these critical values, the researchers transparently convey that estimated effects up to a medium-to-large magnitude will consistently fall short of significance. In essence, this scenario exemplifies a version of the ``winner's curse'' (Hedges, 1984), made explicit. In this context, the winner's curse indicates the tendency for a statistically significant initial finding (i.e., a ``winner'') to be associated with an overestimated effect size which will probably be deflated in subsequent replications (i.e., the ``curse''), especially if such initial finding was obtained on a small sample. Knowing from the critical values that a specific result must necessarily be associated with an estimated large effect size or be non-significant, readers are, in principle, prevented from both over-interpreting the magnitude of an effect size and from equating lack of statistical significance with lack of an effect of interest.
 
@@ -276,7 +276,7 @@ To provide more tangible illustrations of the practical application of critical 
 \hypertarget{how-to-compute-critical-effect-size-values}{%
 \section{How to Compute Critical Effect Size Values}\label{how-to-compute-critical-effect-size-values}}
 
-In this section, we provide guidance and formulas for computing critical values in general, with examples for frequently encountered effect sizes including Standardized Mean Differences (Cohen's \(d\)), correlations (Pearson's r), and raw and standardized coefficients in linear models. These formulas have been incorporated into R functions of the package ``criticalESvalues'' accessible at: \url{https://github.com/filippogambarota/criticalvalue}, and are elaborated upon in the subsequent section.
+In this section, we provide guidance and formulas for computing critical values in general, with examples for frequently encountered effect sizes including Standardized Mean Differences (Cohen's \(d\)), correlations (Pearson's r), and raw and standardized coefficients in linear models. These formulas have been incorporated into R functions of the package ``criticalvalue'' accessible at: \url{https://github.com/filippogambarota/criticalvalue}, and are elaborated upon in the subsequent section.
 
 \hypertarget{t-test}{%
 \subsection{t-test}\label{t-test}}
@@ -395,7 +395,7 @@ Despite we discussed only linear models, the same approach could be theoreticall
 \hypertarget{examples-in-r}{%
 \section{Examples in R}\label{examples-in-r}}
 
-In this section, we introduce a user-friendly implementation of the aforementioned mathematical computations as functions of the package ``criticalESvalues'' in R. The complete package can be accessed at: \url{https://github.com/filippogambarota/criticalvalue}. Here, we demonstrate its application through two examples: one example of a t-test on real data and a computation of the critical value for a correlation from sample size. In the Supplementary online materials additional examples can be found for correlation, t-test, paired t-test, linear models and regression coefficients, both from data and from sample size.
+In this section, we introduce a user-friendly implementation of the aforementioned mathematical computations as functions of the package ``criticalvalue'' in R. The complete package can be accessed at: \url{https://github.com/filippogambarota/criticalvalue}. Here, we demonstrate its application through two examples: one example of a t-test on real data and a computation of the critical effect size values for a correlation from sample size. It is important to note that, in general, depending on the researcher's hypotheses, the package allows for the calculation of either two critical effect size values for two-tailed tests or a single critical effect size value for one-tailed tests, for which the direction must be specified. In the Supplementary online materials additional examples can be found for correlation, t-test, paired t-test, linear models and regression coefficients.
 
 First the package should be downloaded and opened with the library function:
 
@@ -417,37 +417,37 @@ For our examples on real data we used from the package `psych' the dataset ``hol
 \end{Highlighting}
 \end{Shaded}
 
-We want to know the critical value for a t-test comparing boys and girls on a cognitive variable of visual perception. In this case, it can be easily done with the same procedure using the `t.test' function:
+We want to know the critical value for a t-test comparing boys and girls on a cognitive variable of visual perception. In this case, it can be easily done using the `t.test' function:
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{tt }\OtherTok{\textless{}{-}} \FunctionTok{t.test}\NormalTok{(Holz}\SpecialCharTok{$}\NormalTok{t01\_visperc[Holz}\SpecialCharTok{$}\NormalTok{female }\SpecialCharTok{==} \DecValTok{1}\NormalTok{], }
-\NormalTok{             Holz}\SpecialCharTok{$}\NormalTok{t01\_visperc[Holz}\SpecialCharTok{$}\NormalTok{female }\SpecialCharTok{==} \DecValTok{2}\NormalTok{])}
+\NormalTok{             Holz}\SpecialCharTok{$}\NormalTok{t01\_visperc[Holz}\SpecialCharTok{$}\NormalTok{female }\SpecialCharTok{==} \DecValTok{2}\NormalTok{], }\AttributeTok{var.equal =}\NormalTok{ T)}
 \FunctionTok{critical}\NormalTok{(tt)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 #> 
-#>  Welch Two Sample t-test
+#>  Two Sample t-test
 #> 
 #> data:  Holz$t01_visperc[Holz$female == 1] and Holz$t01_visperc[Holz$female == 2]
-#> t = 1.4095, df = 298.9, p-value = 0.1597
+#> t = 1.4062, df = 299, p-value = 0.1607
 #> alternative hypothesis: true difference in means is not equal to 0
 #> 95 percent confidence interval:
-#>  -0.06419229  0.38823118
+#>  -0.06472157  0.38876046
 #> sample estimates:
 #> mean of x mean of y 
 #>  4.314090  4.152071 
 #> 
 #> |== Effect Size and Critical Value ==| 
-#> d = 0.1623665 dc = ± 0.2269609 bc = ± 0.2262117 
-#> g = 0.1619587 gc = ± 0.2263909
+#> d = 0.1621764 dc = ± 0.2269606 bc = ± 0.226741 
+#> g = 0.1617692 gc = ± 0.2263908
 \end{verbatim}
 
-The output gives a wide range of values: the Cohen's \(d\) calculated on the data (\(d\)), the critical Cohen's \(d\) (\(dc\)), the numerator of the formula for the critical Cohen's \(d\) (\(bc\)), the Cohen's \(d\) adjusted for small samples (\(g\)) and the critical Cohen's \(d\) adjusted for small samples (\(gc\)).
+The output gives a wide range of values: the Cohen's \(d\) calculated on the data (\(d\)), the critical Cohen's \(d\) (\(dc\)), the numerator of the formula for the critical Cohen's \(d\) (\(bc\)), the Cohen's \(d\) adjusted for small samples (\(g\)) and the critical Cohen's \(d\) adjusted for small samples (\(gc\)). The variance is set to be equal, but if that is not the case of your data, you can also run Welch two sample \(t\)-test and obtain the critical effect size values for that.
 
-In the next example we will show the use of the package's function \texttt{critical\_cor} to calculate the critical value for a correlation in a prospective framework.
+In the next example we will show the use of the package's function \texttt{critical\_cor} to calculate the critical values for a correlation in a prospective framework.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -467,7 +467,7 @@ In the next example we will show the use of the package's function \texttt{criti
 #> [1] "z"
 \end{verbatim}
 
-The direction of the hypothesis and the test to apply, either \(t\)-test or \(z\)-test, should be specified. The output will return the critical correlation value, the degrees of freedom and the type of test used.
+The direction of the hypothesis and the test to apply, either \(t\)-test or \(z\)-test, should be specified. The output will return the critical correlation value(s), the degrees of freedom and the type of test used.
 
 \hypertarget{discussion}{%
 \section{Discussion}\label{discussion}}
